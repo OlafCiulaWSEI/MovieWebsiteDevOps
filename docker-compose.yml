@@ -3,13 +3,14 @@ version: '3.8'
 services:
   frontend:
     build: ./frontend
-    container_name: frontend
+    container_name: movie_frontend
     ports:
       - "8080:80"
 
   backend:
     build: ./backend
-    container_name: backend
+    container_name: movie_backend
     ports:
       - "3000:3000"
-
+    environment:
+      - MOVIE_API_KEY=${MOVIE_API_KEY}
