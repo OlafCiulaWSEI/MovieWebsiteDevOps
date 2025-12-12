@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: movie-backend-deployment
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: movie-backend
+  template:
+    metadata:
+      labels:
+        app: movie-backend
+    spec:
+      containers:
+        - name: movie-backend
+          image: movie-backend:latest
+          ports:
+            - containerPort: 3000
+          env:
+            - name: MOVIE_API_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: movie-secrets
+                  key: MOVIE_API_KEY
